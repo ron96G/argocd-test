@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ingress-nginx
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: ingress-nginx/ingress-nginx
+    repoURL: https://kubernetes.github.io/ingress-nginx
+    targetRevision: 4.7.0
+    helm:
+      releaseName: my-nginx-release
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: ingress-nginx
